@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Coin from './coin';
 import Coins from './conis';
 
-// switch 는 한 번에 하나의 Router를 렌더릴할 수 있는 방법
+// switch 는 한 번에 하나의 Router를 렌더링할 수 있는 방법
 function Router() {
   return (
     <BrowserRouter>
