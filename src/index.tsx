@@ -1,22 +1,22 @@
-// 5-0
-// Setup
+// // 5-0
+// // Setup
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { ThemeProvider } from 'styled-components';
-import App from './App';
-import { theme } from './theme';
+// import React from 'react';
+// import ReactDOM from 'react-dom/client';
+// import { ThemeProvider } from 'styled-components';
+// import App from './App';
+// import { theme } from './theme';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <div>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </div>
-);
+// const root = ReactDOM.createRoot(
+//   document.getElementById('root') as HTMLElement
+// );
+// root.render(
+//   <div>
+//     <ThemeProvider theme={theme}>
+//       <App />
+//     </ThemeProvider>
+//   </div>
+// );
 
 // react-router-dom v5 버전 사용시URL 은 변하는데 렌더링이 안되는 이슈가 있습니다.
 // 이 문제를 겪으시는 분은
@@ -32,3 +32,29 @@ root.render(
 // 한 스크린내에 또 다른 Router를 가질 수 있는 것
 // /btc/information btc 내에 information 가기
 // /btc/chart btc 내에 chart 보기
+
+///////////////////////////////////////
+// 5-9
+// React Query part one
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from 'styled-components';
+import App from './App';
+import { theme } from './theme';
+
+const queryClient = new QueryClient();
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
+  <div>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </div>
+);
