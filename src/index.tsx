@@ -58,3 +58,12 @@ root.render(
     </QueryClientProvider>
   </div>
 );
+
+// 리액트 쿼리 설치
+// Create a client
+// 1. const queryClient = new QueryClient(); 이것을 만들고
+// 2. provider 만들기
+
+// queryClientProvider 안에 있는 것은 queryClient에 접근할 수 있음
+
+// 리액트 쿼리는 로직들을 축약해줌

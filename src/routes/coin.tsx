@@ -947,6 +947,40 @@ function Coin() {
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch('/:coinId/price');
   const chartMatch = useRouteMatch('/:coinId/chart');
+  // const [loading, setLoading] = useState(true);
+  //   const [info, setInfo] = useState<InfoData>();
+  //   const [priceInfo, setPriceInfo] = useState<PriceData>();
+  //   // routematch에게 우리가 coinId/price 라는 URL 에 있는지 확인
+  //   // 만약 내가 선택한 URL에 들어가 있다면 object를 받는다
+  //   // 내가 거기에 안들어가 있다면 null을 받는다
+  //   const priceMatch = useRouteMatch('/:coinId/price');
+  //   const chartMatch = useRouteMatch('/:coinId/chart');
+  //   useEffect(() => {
+  //     (async () => {
+  //       const infoData = await (
+  //         await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+  //       ).json();
+  //       const priceData = await (
+  //         await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
+  //       ).json();
+  //       setInfo(infoData);
+  //       setPriceInfo(priceData);
+  //       setLoading(false);
+  //     })();
+  //   }, [coinId]);
+  // userQuery hook 사용
+
+  // ✨ 여기 fetcher 함수는 argumnet를 전달 받고 있어서 coinId를 알아야 함
+  // ✨ fetchCoinInfo 함수를 불러와서 URL로부터 오는 coinId를 넣어줌
+  // ✨ 두 가지의 query를 만들었는데 이 둘은 모두 같은 query key를 갖고 있음
+  // 하지만 React query의 query 는 각각의 고유한 id를 갖고 있어야함
+  // React query 가 우리의 query를 인식하는 방법은 key 를 보고 인식한다
+  // React query는 key 를 array 로 감싸서 표현함 ['allCoins'] 이런식
+  // 그래서 이렇게 만듦 ['info', coinId], ['tickers', coinId]
+
+  // React Query 안에는 isLoading이라는 상태가 포함되어 있다
+  // 여기서도 isLoading 이름이 같기 때문에 isLoading: infoLoading 이름을 이렇게 바꿔줌
+  // data 도 마찬가지로 바꿔준다
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ['info', coinId],
     () => fetchCoinInfo(coinId)
@@ -955,6 +989,8 @@ function Coin() {
     ['tickers', coinId],
     () => fetchCoinTickers(coinId)
   );
+  // isLoading 은 두 가지로 구성되어 있다. 그래서 새로운 변수를 만듦
+  // loading 은 infoLoading 혹은 tickersLoading 이면 true
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
